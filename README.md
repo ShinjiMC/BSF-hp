@@ -1,5 +1,15 @@
 # BSF-hp: Bulk Synchronous Farm with Hybrid Parallelism
 
+<div align="center">
+
+![Cplusplus](https://img.shields.io/badge/-C++-blue?logo=cplusplus)
+![Build Status](https://img.shields.io/badge/build-passing-77dd77)
+[![Commits](https://badgen.net/github/commits/ShinjiMC/BSF-hp/main)]()
+![Version](https://img.shields.io/badge/version-1.0.0-b39eb5)
+![License](https://img.shields.io/badge/license-MIT-cfcfc4)
+
+</div>
+
 By Braulio Nayap Maldonado Casilla of DEXO Corp.
 
 ## Overview
