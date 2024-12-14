@@ -10,13 +10,21 @@ This source code is a part of BSF Skeleton (https://github.com/leonid-sokolinsky
 #include "BSF-Forwards.h"		  // Problem Independent Function Forwards
 #include "BSF-ProblemFunctions.h" // Predefined Problem Function Forwards
 using namespace std;
+bool BD_enableTMap = false;
+double t_Map = 0;
 //======================================== Problem-independent codes (don't modify them) ====================================
 int main(int argc, char *argv[])
 {
 	char emptystring[] = "";
 	char *message = emptystring;
 	unsigned success;
-
+	for (int i = 1; i < argc; i++)
+	{
+		if (strcmp(argv[i], "--tMap") == 0)
+		{
+			BD_enableTMap = true;
+		}
+	}
 	BC_MpiRun();
 	BD_success = true;
 	PC_bsf_Init(&BD_success);
@@ -265,7 +273,7 @@ static bool BC_WorkerMap()
 	PC_bsfAssignSublistLength(BD_sublistSize[BD_rank]);
 	PC_bsfAssignAddressOffset(BD_offset[BD_rank]);
 	PC_bsfAssignParameter(BD_order.parameter);
-	double t_Map = 0;
+
 	int offset = BD_offset[BD_rank];
 	int sublistSize = BD_sublistSize[BD_rank];
 	int chunk_size = BD_chunkSize[BD_rank];
@@ -308,11 +316,12 @@ static bool BC_WorkerMap()
 			break;
 		}
 	}
-	/* Time measurement */
-	t_Map += MPI_Wtime();
-	/* Time measurement */
-	cout << "t_Map = " << t_Map << "\t";
-
+	if (BD_enableTMap)
+	{
+		/* Time measurement */
+		t_Map += MPI_Wtime();
+		cout << "t_Map = " << t_Map << "\t";
+	}
 	return !BD_EXIT;
 };
 
